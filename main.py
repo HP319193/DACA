@@ -77,14 +77,13 @@ if circles is not None:
 
         cv2.imwrite(f"output/fullsize_{input_path}", crop_img)
 
-# x1, y1 = 115, 2680  # Top-left corner
-# x2, y2 = 1210, 3160  # Bottom-right corner
+x1, y1 = 0, 2640  # Top-left corner
+x2, y2 = 1275, 3300  # Bottom-right corner
 
-# cropped_image = image[y1:y2, x1:x2]
+cropped_image = image[y1:y2, x1:x2]
 
-# cv2.imwrite("IDENTITY.jpg", cropped_image)
+cv2.imwrite(f"output/identity_{input_path}", cropped_image)
 
-# Show image
 # cv2.imshow("Detected Circles", image)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
