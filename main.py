@@ -4,10 +4,18 @@ from typing import List, Tuple
 import os
 
 def getCircle(RT: List[int], LB: List[int], RB: List[int]) -> Tuple[int, int, int]:
+    print(RT, LB, RB)
     X = int((LB[0] + RB[0])/2)
-    Y = int((RT[1] + RB[1])/2)
+    Y = (RT[1] + RB[1])/2
+    
+    y_v = RB[1] - RT[1]
+    y_h = RT[0] - RB[0]
 
-    radius = int((RB[0] - LB[0])/2 + 50)
+    y_offset = (y_h * y_h)/(2 * y_v)
+
+    Y = int(Y + y_offset)
+
+    radius = int((RB[0] - LB[0])/2 + 60)
 
     return X, Y, radius
 
