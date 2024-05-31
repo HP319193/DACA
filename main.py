@@ -15,7 +15,7 @@ def getCircle(RT: List[int], LB: List[int], RB: List[int]) -> Tuple[int, int, in
 
     Y = int(Y + y_offset)
 
-    radius = int((RB[0] - LB[0])/2 + 60)
+    radius = int((RB[0] - LB[0])/2 + 70)
 
     return X, Y, radius
 
@@ -41,7 +41,7 @@ def getPostion(path: str) -> Tuple[List[int], List[int], List[int]]:
         contours, _ = cv2.findContours(black_areas, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         # Optional: Filter contours based on size or other properties
-        filtered_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > 250]
+        filtered_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > 500]
 
         center_xs = []
         center_ys = []
@@ -50,6 +50,7 @@ def getPostion(path: str) -> Tuple[List[int], List[int], List[int]]:
         for cnt in filtered_contours:
             # Offset the contour coordinates and draw on the original image
             offset_cnt = cnt + np.array([xy[0], xy[1]])
+
             M = cv2.moments(offset_cnt)
             if M["m00"] != 0:
                 cX = int(M["m10"] / M["m00"])
@@ -78,6 +79,12 @@ for file in files:
     image = cv2.imread(input_path)
 
     RT, LB, RB = getPostion(input_path)
+
+    # cv2.circle(image, (RT[0], RT[1]), 30, (0, 255, 0), 2)
+    # cv2.circle(image, (LB[0], LB[1]), 30, (0, 255, 0), 2)
+    # cv2.circle(image, (RB[0], RB[1]), 30, (0, 255, 0), 2)
+
+    # cv2.imwrite(f"middle/fullsize_{file}", image)
 
     center_x, center_y, radius = getCircle(RT, LB, RB)
     # crop circle and save
