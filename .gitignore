@@ -1,2 +1,3 @@
-input
-output
+db.sqlite3
+source
+main/static/output

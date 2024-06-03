@@ -1,0 +1,56 @@
+{% load static %}
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+    {% csrf_token %}
+    <div id="modal" class="modal">
+        <div class="modal-content">
+        </div>
+
+    </div>
+
+    <div class="header">
+        <h1>Template Cropper Approval</h1>
+    </div>
+
+    <div class="header" id="browserbar">
+        <label class="upload">
+            <span class="upload_content">
+                <img src="{% static 'svg/upload.svg' %}" alt="" class="svg">
+                <span class="title">Browse</span>
+            </span>
+
+            <input type="file" accept="image/*" multiple id="imageUpload">
+        </label>
+
+    </div>
+
+    <div class="header" id="processingbar">
+        <h2>Processing Image Files</h2>
+    </div>
+
+    <div class="header" id="loaderbar">
+        <div class="loader"></div>
+    </div>
+
+    <div class="itemsbar" id="itemsbar">
+        <!-- <div class="imagebar">
+            <label class="imagelabel">QTY: 1</label>
+            <img src="{% static 'output/fullsize_1be2edf5-d9c0-4439-a107-92d346f991e6.jpg' %}" alt="" class="img">
+        </div> -->
+    </div>
+
+    <div class="header" style="margin-top: 40px;" id="submit">
+        <button class="submit">
+            SUBMIT
+        </button>
+    </div>
+</body>
+
+</html>

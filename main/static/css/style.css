@@ -1,0 +1,213 @@
+:root {
+    color-scheme: dark;
+    --techwave-site-bg-color: #0f0e11;
+    --techwave-header-bg-color: #17151b;
+    --techwave-some-r-bg-color: #17151b;
+    --techwave-some-a-bg-color: #2b2830;
+    --techwave-main-color: #7c5fe3;
+    --techwave-main-color1: #8768f8;
+    --techwave-main-color2: #b7a4fb;
+    --techwave-heading-color: #c0bcca;
+    --techwave-body-color: #7e7a86;
+    --techwave-border-color: #312e37;
+    --techwave-button-bg-color: #1c1925;
+    --techwave-hover-color: #fff;
+    --techwave-heading-font-family: 'Heebo', sans-serif;
+    --techwave-body-font-family: 'Work Sans', sans-serif;
+    --techwave-left-panel-width: 300px;
+    --techwave-header-height: 100px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.upload {
+    margin-top: 50px;
+    cursor: pointer;
+    text-align: center;
+    width: 10%;
+    aspect-ratio: 1 / 1;
+    border: 2px dashed var(--techwave-border-color);
+    border-radius: 5px;
+    background-color: var(--techwave-some-r-bg-color);
+    padding: 46px;
+    transition: all .3s ease;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.upload_content {
+    width: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+.svg {
+    width: 70px;
+    height: auto;
+    color: var(--techwave-heading-color);
+    margin-bottom: 15px;
+}
+
+.upload_content .title {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: var(--techwave-heading-color);
+    font-family: var(--techwave-heading-font-family);
+    margin-bottom: 3px;
+}
+
+.upload input[type="file"] {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.loader {
+    margin-top: 20px;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid var(--techwave-main-color1);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1.5s linear infinite;
+}
+
+.img {
+    width: 100%;
+    margin: 1%;
+}
+
+.itemsbar {
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+h2 {
+    color: var(--techwave-main-color1);
+}
+
+.imagebar {
+    align-items: center;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 2px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.imagebar:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+}
+
+.imagelabel {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #888;
+    width: 30%;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rejectbut {
+    font-size: 16px;
+    margin-top: 20px;
+    padding: 10px 70px;
+    font-family: var(--techwave-body-font-family);
+    font-weight: bold;
+    background-color: var(--techwave-main-color);
+    border: none;
+    cursor: pointer;
+}
+
+.submit {
+    font-size: xx-large;
+    letter-spacing: 5px;
+    font-weight: bolder;
+    padding: 10px 30px;
+    background-color: aqua;
+    border-radius: 10px;
+    border: 5px solid;
+    cursor: pointer;
+}
+
+.submit:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
