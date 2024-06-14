@@ -1,0 +1,44 @@
+{% load static %}
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/recheck.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/recheck.css' %}" />
+</head>
+
+<body>
+    {% csrf_token %}
+    <div id="modal" class="modal">
+        <div class="modal-content">
+        </div>
+
+    </div>
+
+    <div class="header">
+        <h1>Template Cropper Recheck</h1>
+    </div>
+
+    {% if exist %}
+    <div class="itemsbar" id="itemsbar">
+        {% for item in items %}
+        <div class="imagebar here" id="{{item.id}}">
+            <label class="imagelabel" id="qtylabel_{{item.id}}">QTY: {{item.quantity}}</label>
+            <img src="download/{{item.name}}" class="img" alt="{{item.name}}" id="monitor_{{item.name}}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="header" style="margin-top: 40px;" id="submit">
+        <button class="submit">
+            SUBMIT
+        </button>
+    </div>
+    {% else %}
+    <div class="header" id="noimage">
+        <h1>No awaiting images</h1>
+    </div>
+    {% endif %}
+</body>
+
+</html>

@@ -37,6 +37,23 @@ def fix(request):
     print(rejected)
     return render(request, 'fix.html', {"items": rejected})
 
+def recheck(request):
+    items = Image.objects.filter(status='awaiting')
+    awaiting = []
+
+    for item in items:
+        id = item.name.split('.')[0]
+        awaiting.append({"name": item.name, "quantity": item.quantity, "id": id})
+
+    print(awaiting)
+
+    exist = len(awaiting)
+
+    if exist > 0:
+        return render(request, 'recheck.html', {"items": awaiting, "exist": 1})
+    else:
+        return render(request, 'recheck.html', {"items": awaiting})
+
 def source_file(request, filepath):
     file_path = f"source/{filepath}"
     response = FileResponse(open(file_path, 'rb'))

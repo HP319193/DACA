@@ -6,6 +6,7 @@ urlpatterns = [
     path('processImage', views.processImage, name="processImage"),
     path('submit', views.submit, name="submit"),
     path('fix', views.fix, name="fix"),
+    path('recheck', views.recheck, name="recheck"),
     path('updateQuantity', views.updateQuantity, name="updateQuantity"),
     path('processFix', views.processFix, name="processFix"),
     path('download/<filepath>', views.download_file, name='download_file'),
