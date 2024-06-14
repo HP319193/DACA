@@ -7,6 +7,7 @@ urlpatterns = [
     path('submit', views.submit, name="submit"),
     path('fix', views.fix, name="fix"),
     path('updateQuantity', views.updateQuantity, name="updateQuantity"),
+    path('processFix', views.processFix, name="processFix"),
     path('download/<filepath>', views.download_file, name='download_file'),
     path('source/<filepath>', views.source_file, name='source_file'),
 ]

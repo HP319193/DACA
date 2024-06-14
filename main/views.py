@@ -32,7 +32,7 @@ def fix(request):
     rejected = []
 
     for item in items:
-        rejected.append(item.name)
+        rejected.append({"name": item.name, "quantity": item.quantity})
 
     print(rejected)
     return render(request, 'fix.html', {"items": rejected})
@@ -154,6 +154,23 @@ def cropImage(filename: str) -> None:
 def uploadImage(request):
     return render(request, 'upload.html')
 
+@csrf_exempt
+def processFix(request):
+    if request.method == 'POST' and request.FILES:
+        file = request.FILES.getlist('files[]')[0]
+        name = request.POST.get('name')
+
+        file_path = os.path.join("main/static/output", f"fullsize_{name}")
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+        with open(file_path, 'wb') as f:
+            f.write(file.read())
+
+        Image.objects.filter(name=name).update(status="awaiting")
+        
+        return JsonResponse({"status": "good"})
+    
 def processImage(request):
     if request.method == 'POST' and request.FILES:
         files = request.FILES.getlist('files[]')
