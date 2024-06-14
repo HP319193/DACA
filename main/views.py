@@ -27,6 +27,20 @@ def submit(request):
 
         return JsonResponse({"status": "good"})
         
+def fix(request):
+    items = Image.objects.filter(status='rejected')
+    rejected = []
+
+    for item in items:
+        rejected.append(item.name)
+
+    print(rejected)
+    return render(request, 'fix.html', {"items": rejected})
+
+def source_file(request, filepath):
+    file_path = f"source/{filepath}"
+    response = FileResponse(open(file_path, 'rb'))
+    return response
 
 def download_file(request, filepath):
     file_path = f"main/static/output/fullsize_{filepath}"
@@ -161,3 +175,17 @@ def processImage(request):
                 filelist.append(filename)
 
         return JsonResponse({"filelist": filelist})
+
+@csrf_exempt
+def updateQuantity(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        quantity = request.POST.get('quantity')
+
+        print(name)
+        try:
+            Image.objects.filter(name=name).update(quantity=int(quantity))
+            return JsonResponse({"status": "good"})
+        except:
+            Image.objects.filter(name=name).update(quantity=int(quantity))
+            return JsonResponse({"status": "bad"})

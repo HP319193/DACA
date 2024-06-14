@@ -1,0 +1,46 @@
+{% load static %}
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/fix.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/fix.css' %}" />
+</head>
+
+<body>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <img src="source/07ad64e2-4757-4c74-abc9-78a72b73fcb7.jpg" alt="" class="modal_img">
+            <div style="width: 40%;">
+                <img src="download/07ad64e2-4757-4c74-abc9-78a72b73fcb7.jpg" alt="" class="modal_img"
+                    style="width: 100%;">
+
+                <label class="upload">
+                    <span class="upload_content">
+                        <img src="{% static 'svg/upload.svg' %}" alt="" class="svg">
+                        <span class="title">Browse</span>
+                    </span>
+
+                    <input type="file" accept="image/*" multiple id="imageUpload">
+                </label>
+
+                <button class="fixbut">Fix</button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="itemsbar" id="itemsbar">
+        {% for item in items %}
+        <div class="imagebar">
+            <label class="imagelabel">QTY: 1</label>
+            <img src="download/{{item}}" alt="{{item}}" class="img">
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>

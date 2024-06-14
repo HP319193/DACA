@@ -37,26 +37,61 @@ $(document).ready(function () {
 
                     var id = file.split('.')[0];
 
+                    var label = $('<label>').text("QTY: 1").addClass("imagelabel").attr('id', 'qtylabel_' + id);
+                    var img = $('<img>').attr('src', 'download/' + file).addClass('img').attr('alt', file).attr('id', 'monitor_' + file);
+
                     var div = $('<div>').attr('id', id).addClass('imagebar').click(function () {
                         var file = $(this).find('img').attr('alt');
+
                         var modal_img = $('<img>').attr('src', 'download/' + file).addClass('img').attr('alt', file);
-                        var modal_but = $('<button>').addClass('rejectbut').text('Reject').click(function () {
+                        var modal_but = $('<button>').addClass('rejectbut').text('Reject / Cancel').click(function () {
 
                             var file = $(this).parent().find('img').attr('alt');
                             var id = file.split('.')[0];
 
-                            $('#' + id).css('background-color', 'red');
+                            if ($('#' + id).hasClass('imagebar')) {
+                                $('#' + id).removeClass('imagebar');
+                                $('#' + id).addClass('rejected_imagebar');
+                            }
+                            else {
+                                $('#' + id).removeClass('rejected_imagebar');
+                                $('#' + id).addClass('imagebar');
+                            }
+
                             $('#modal').hide();
                         });
 
+                        var qty_label = $('<label>').addClass('qty_label').text('QTY : ');
+                        var qty_input = $('<input>').attr('type', 'number').val(1).addClass('qty_input').change(function () {
+                            var updated_quantity = $(this).val();
+
+                            $.ajax({
+                                url: '/updateQuantity',
+                                method: 'POST',
+                                data: { name: file, quantity: updated_quantity },
+                                success: function (result) {
+                                    if (result.status === "good") {
+                                        console.log(result.status);
+                                        $("#qtylabel_" + id).text("QTY: " + updated_quantity);
+                                    }
+                                }
+                            });
+
+                        });
+
+                        var qty_div = $('<div>');
+                        qty_div.append(qty_label);
+                        qty_div.append(qty_input);
+
                         $(".modal-content").html("");
+                        $(".modal-content").append(qty_div);
                         $(".modal-content").append(modal_img);
                         $(".modal-content").append(modal_but);
 
                         $('#modal').show();
                     });
-                    var label = $('<label>').text("QTY: 1").addClass("imagelabel");
-                    var img = $('<img>').attr('src', 'download/' + file).addClass('img').attr('alt', file);
+
+
 
                     div.append(label);
                     div.append(img);
@@ -71,17 +106,28 @@ $(document).ready(function () {
     });
 
     $('#submit').click(function () {
-        console.log("Here");
         var items = $('#itemsbar').find('.imagebar');
 
         items.each(function (index, item) {
-            console.log($(item).css('background-color'));
-
             var key = $(item).find('img').attr('alt');
-
             var value = true;
-            if ($(item).css('background-color') == "rgb(255, 0, 0)")
-                value = false;
+
+            $.ajax({
+                url: '/submit',
+                method: 'POST',
+                data: { key: key, value: value },
+                success: function (result) {
+                    console.log(result);
+                }
+
+            });
+        });
+
+        var rejected_items = $('#itemsbar').find('.rejected_imagebar');
+
+        rejected_items.each(function (index, item) {
+            var key = $(item).find('img').attr('alt');
+            var value = false;
 
             $.ajax({
                 url: '/submit',

@@ -1,0 +1,173 @@
+:root {
+    color-scheme: dark;
+    --techwave-site-bg-color: #0f0e11;
+    --techwave-header-bg-color: #17151b;
+    --techwave-some-r-bg-color: #17151b;
+    --techwave-some-a-bg-color: #2b2830;
+    --techwave-main-color: #7c5fe3;
+    --techwave-main-color1: #8768f8;
+    --techwave-main-color2: #b7a4fb;
+    --techwave-heading-color: #c0bcca;
+    --techwave-body-color: #7e7a86;
+    --techwave-border-color: #312e37;
+    --techwave-button-bg-color: #1c1925;
+    --techwave-hover-color: #fff;
+    --techwave-heading-font-family: 'Heebo', sans-serif;
+    --techwave-body-font-family: 'Work Sans', sans-serif;
+    --techwave-left-panel-width: 300px;
+    --techwave-header-height: 100px;
+}
+
+.itemsbar {
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.imagebar {
+    align-items: center;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 2px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    background-color: red;
+}
+
+.imagebar:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+}
+
+.imagelabel {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.img {
+    width: 100%;
+    margin: 1%;
+}
+
+.modal_img {
+    width: 40%;
+    margin: 1%;
+}
+
+.modal {
+    /* display: none; */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #888;
+    width: 80%;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    display: flex;
+    align-items: center;
+    height: 80%;
+    justify-content: center;
+}
+
+
+.upload {
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 85%;
+    aspect-ratio: 50 / 1;
+    border: 2px dashed var(--techwave-border-color);
+    border-radius: 5px;
+    padding: 46px;
+    transition: all .3s ease;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.upload_content {
+    width: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+.svg {
+    width: 70px;
+    height: auto;
+    color: var(--techwave-heading-color);
+    margin-bottom: 5px;
+}
+
+.upload_content .title {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: var(--techwave-heading-color);
+    font-family: var(--techwave-heading-font-family);
+    margin-bottom: 3px;
+}
+
+.upload input[type="file"] {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.fixbut {
+    width: 101%;
+    padding: 10px 30px;
+    font-size: large;
+    margin-top: 5px;
+    letter-spacing: 2px;
+    background-color: var(--techwave-main-color);
+
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}

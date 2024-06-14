@@ -124,9 +124,48 @@ h2 {
     border: 1px solid #cccccc;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     cursor: pointer;
+    position: relative;
 }
 
 .imagebar:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+}
+
+.rejected_imagebar {
+    align-items: center;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 2px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    position: relative;
+}
+
+.rejected_imagebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, transparent calc(50% - 5px), red, transparent calc(50% + 5px));
+}
+
+.rejected_imagebar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom left, transparent calc(50% - 5px), red, transparent calc(50% + 5px));
+}
+
+.rejected_imagebar:hover {
     transform: scale(1.1);
     transition: transform 0.3s;
 }
@@ -146,6 +185,19 @@ h2 {
     height: 100%;
     overflow: hidden;
     background-color: transparent;
+}
+
+.qty_label {
+    color: black;
+    font-size: 24px;
+}
+
+.qty_input {
+    background-color: transparent;
+    font-size: 24px;
+    width: 50px;
+    color: black;
+    border-radius: 5px;
 }
 
 /* Modal Content/Box */
