@@ -1,5 +1,6 @@
 db.sqlite3
 source
-main/static/output
+main/static/output/*
+!main/static/output
 main/__pycache__
 DACA/__pycache__
