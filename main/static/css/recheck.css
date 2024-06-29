@@ -1,5 +1,5 @@
 :root {
-    color-scheme: dark;
+    color-scheme: light;
     --techwave-site-bg-color: #0f0e11;
     --techwave-header-bg-color: #17151b;
     --techwave-some-r-bg-color: #17151b;
@@ -18,6 +18,13 @@
     --techwave-header-height: 100px;
 }
 
+body {
+    background-color:rgb(245, 248, 255);
+    color: #4A4A4A; /* Dark Gray for text */
+    font-family: Arial, sans-serif; /* A friendly and readable font */
+    margin: 0;
+    padding: 0;
+}
 .header {
     display: flex;
     justify-content: center;
@@ -60,7 +67,6 @@
 .svg {
     width: 70px;
     height: auto;
-    color: var(--techwave-heading-color);
     margin-bottom: 15px;
 }
 
@@ -90,7 +96,7 @@
 .loader {
     margin-top: 20px;
     border: 10px solid #f3f3f3;
-    border-top: 10px solid var(--techwave-main-color1);
+    border-top: 10px solid #4A90E2;  
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -106,8 +112,9 @@
     display: flex;
     padding-left: 10%;
     padding-right: 10%;
+    margin-top: 30px;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 h2 {
@@ -125,6 +132,7 @@ h2 {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     cursor: pointer;
     position: relative;
+    background-color: antiquewhite;
 }
 
 .imagebar:hover {
@@ -143,6 +151,7 @@ h2 {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     cursor: pointer;
     position: relative;
+    background-color: antiquewhite;
 }
 
 .rejected_imagebar::before {
@@ -152,7 +161,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom right, transparent calc(50% - 5px), red, transparent calc(50% + 5px));
+    background: linear-gradient(to bottom right, transparent calc(50% - 5px), #f1807e, transparent calc(50% + 5px));
 }
 
 .rejected_imagebar::after {
@@ -162,7 +171,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom left, transparent calc(50% - 5px), red, transparent calc(50% + 5px));
+    background: linear-gradient(to bottom left, transparent calc(50% - 5px), #f1807e, transparent calc(50% + 5px));
 }
 
 .rejected_imagebar:hover {
@@ -203,7 +212,7 @@ h2 {
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 0.5% auto;
     padding: 20px;
     border-radius: 15px;
     border: 1px solid #888;
@@ -221,7 +230,7 @@ h2 {
     padding: 10px 70px;
     font-family: var(--techwave-body-font-family);
     font-weight: bold;
-    background-color: var(--techwave-main-color);
+    background-color: #f1807e;
     border: none;
     cursor: pointer;
 }
@@ -231,9 +240,11 @@ h2 {
     letter-spacing: 5px;
     font-weight: bolder;
     padding: 10px 30px;
-    background-color: aqua;
+    background-color:  #4A90E2;
     border-radius: 10px;
-    border: 5px solid;
+    border : none;
+    color : white;
+    font-family : Arial, sans-serif;
     cursor: pointer;
 }
 
