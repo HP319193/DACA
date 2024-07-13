@@ -223,3 +223,14 @@ def updateQuantity(request):
         except:
             Image.objects.filter(name=name).update(quantity=int(quantity))
             return JsonResponse({"status": "bad"})
+        
+@csrf_exempt
+def getQuantity(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+
+        image = Image.objects.get(name = name)
+        quantity = image.quantity
+
+        return JsonResponse({"value": quantity})
+        

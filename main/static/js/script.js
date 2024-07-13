@@ -41,78 +41,77 @@ $(document).ready(function () {
                     var label = $('<label>').text("QTY: 1").addClass("imagelabel").attr('id', 'qtylabel_' + id);
                     var img = $('<img>').attr('src', 'download/' + file).addClass('img').attr('alt', file).attr('id', 'monitor_' + file);
 
-                    var div = $('<div>').attr('id', id).addClass('imagebar').click(function () {
-                        var file = $(this).find('img').attr('alt');
+                    var div = $('<div>').attr('id', id).addClass('imagebar').click(change);
+                    // var div = $('<div>').attr('id', id).addClass('imagebar').click(function () {
+                    //     var file = $(this).find('img').attr('alt');
 
-                        var modal_img = $('<img>').attr('src', 'download/' + file).addClass('img').attr('alt', file);
-                        var accept_but = $('<button>').addClass('rejectbut').text('Accept').click(function () {
+                    //     var modal_img = $('<img>').attr('src', 'download/' + file).addClass('img').attr('alt', file);
+                    //     var accept_but = $('<button>').addClass('rejectbut').text('Accept').click(function () {
 
-                            var file = $(this).parent().find('img').attr('alt');
-                            var id = file.split('.')[0];
+                    //         var file = $(this).parent().find('img').attr('alt');
+                    //         var id = file.split('.')[0];
 
-                            if ($('#' + id).hasClass('rejected_imagebar')) {
-                                $('#' + id).removeClass('rejected_imagebar');
-                                $('#' + id).addClass('imagebar');
-                            }
+                    //         if ($('#' + id).hasClass('rejected_imagebar')) {
+                    //             $('#' + id).removeClass('rejected_imagebar');
+                    //             $('#' + id).addClass('imagebar');
+                    //         }
 
-                            var rejected_items = $('#itemsbar').find('.rejected_imagebar');
+                    //         var rejected_items = $('#itemsbar').find('.rejected_imagebar');
 
-                            if (rejected_items.length == 0) {
-                                $('#approve_but').show();
-                                $('#fix_but').hide();
-                            }
+                    //         if (rejected_items.length == 0) {
+                    //             $('#approve_but').show();
+                    //             $('#fix_but').hide();
+                    //         }
 
-                            $('#modal').hide();
-                        });
+                    //         $('#modal').hide();
+                    //     });
 
-                        var reject_but = $('<button>').addClass('rejectbut').text('Reject').click(function () {
+                    //     var reject_but = $('<button>').addClass('rejectbut').text('Reject').click(function () {
 
-                            var file = $(this).parent().find('img').attr('alt');
-                            var id = file.split('.')[0];
+                    //         var file = $(this).parent().find('img').attr('alt');
+                    //         var id = file.split('.')[0];
 
-                            if ($('#' + id).hasClass('imagebar')) {
-                                $('#' + id).removeClass('imagebar');
-                                $('#' + id).addClass('rejected_imagebar');
-                            }
+                    //         if ($('#' + id).hasClass('imagebar')) {
+                    //             $('#' + id).removeClass('imagebar');
+                    //             $('#' + id).addClass('rejected_imagebar');
+                    //         }
 
-                            $('#approve_but').hide();
-                            $('#fix_but').show();
+                    //         $('#approve_but').hide();
+                    //         $('#fix_but').show();
 
-                            $('#modal').hide();
-                        });
+                    //         $('#modal').hide();
+                    //     });
 
-                        var qty_label = $('<label>').addClass('qty_label').text('QTY : ');
-                        var qty_input = $('<input>').attr('type', 'number').val(1).addClass('qty_input').attr('min', '0').change(function () {
-                            var updated_quantity = $(this).val();
+                    //     var qty_label = $('<label>').addClass('qty_label').text('QTY : ');
 
-                            $.ajax({
-                                url: '/updateQuantity',
-                                method: 'POST',
-                                data: { name: file, quantity: updated_quantity },
-                                success: function (result) {
-                                    if (result.status === "good") {
-                                        console.log(result.status);
-                                        $("#qtylabel_" + id).text("QTY: " + updated_quantity);
-                                    }
-                                }
-                            });
+                    //     var qty_input = $('<input>').attr('type', 'number').val(1).addClass('qty_input').attr('min', '0').change(function () {
+                    //         var updated_quantity = $(this).val();
+                    //         $.ajax({
+                    //             url: '/updateQuantity',
+                    //             method: 'POST',
+                    //             data: { name: file, quantity: updated_quantity },
+                    //             success: function (result) {
+                    //                 if (result.status === "good") {
+                    //                     console.log(result.status);
+                    //                     $("#qtylabel_" + id).text("QTY: " + updated_quantity);
+                    //                 }
+                    //             }
+                    //         });
 
-                        });
+                    //     });
 
-                        var qty_div = $('<div>');
-                        qty_div.append(qty_label);
-                        qty_div.append(qty_input);
+                    //     var qty_div = $('<div>');
+                    //     qty_div.append(qty_label);
+                    //     qty_div.append(qty_input);
 
-                        $(".modal-content").html("");
-                        $(".modal-content").append(qty_div);
-                        $(".modal-content").append(modal_img);
-                        $(".modal-content").append(accept_but);
-                        $(".modal-content").append(reject_but);
+                    //     $(".modal-content").html("");
+                    //     $(".modal-content").append(qty_div);
+                    //     $(".modal-content").append(modal_img);
+                    //     $(".modal-content").append(accept_but);
+                    //     $(".modal-content").append(reject_but);
 
-                        $('#modal').show();
-                    });
-
-
+                    //     $('#modal').show();
+                    // });
 
                     div.append(label);
                     div.append(img);
@@ -167,6 +166,9 @@ $(document).ready(function () {
     });
 });
 
+function change() {
+    alert("Hello World!")
+}
 window.onclick = function (event) {
     if (event.target == document.getElementById("modal")) {
         modal.style.display = "none";
