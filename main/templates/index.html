@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <h1>Django test page.</h1>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for x in members %}
+        <tr>
+            <td>{{x.firstname}}</td>
+            <td>{{x.lastname}}</td>
+            <td><a href="delete/{{ x.id }}">delete</a></td>
+            <td><a href="update/{{ x.id }}">update</a></td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <a href="add/">add member</a>
+</body>
+</html>

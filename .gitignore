@@ -4,3 +4,5 @@ main/static/output/*
 !main/static/output/.keep
 main/__pycache__
 DACA/__pycache__
+venv
+main/migrations/__pycache__

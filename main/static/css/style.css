@@ -31,6 +31,7 @@ body {
     justify-content: center;
 }
 
+
 .upload {
     margin-top: 50px;
     cursor: pointer;
@@ -297,4 +298,14 @@ h2 {
         top: 0;
         opacity: 1
     }
+}
+
+
+.login_form {
+    max-width: 500px;
+    padding: 40px 55px;
+    margin: 0 auto;
+    border-radius: 20px;
+    background: #ffffff;
+    /* background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgba(103, 153, 197, 0.7)); */
 }
