@@ -1,43 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0" />
-        <title>Login</title>
-        <link
-            rel="stylesheet"
-            href="{% static 'css/bootstrap.min.css'%}" />
-        <link
-            rel="stylesheet"
-            href="{% static 'css/style.css'%}"/>
-    </head>
-    <body>
-        <div style="height:100vh; background-color:#b5b9c173; padding-top:10%">
-            <div class="login_form">
-                <form action="handlelogin/" method="post">
-                    {% csrf_token %}
-                    <div class="mb-2 fs-2" style= "text-align:center;">
-                        Login
-                    </div>
-            
-                    <div class="mb-2">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email"/>
-                        <p id="email-info" style="color:red"></p>
-                    </div>
-                    <div class="mb-2">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password"/>
-                        <p id="password-info" style="color:red"></p>
-                    </div>
-                    <div class="flex">
-                        <input type="submit" class="btn btn-primary custom-btn m-auto" value="Log in">
-                    </div>
-                </form>
-            </div>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+</head>
+
+<body>
+    <div style="height:100vh; background-color:#b5b9c173; padding-top:10%">
+        <div class="login_form">
+            <form action="handlelogin/" method="post">
+                {% csrf_token %}
+                <div class="mb-2 fs-2" style="text-align:center;">
+                    Login
+                </div>
+
+                <div class="mb-2">
+                    <label for="email" class="form-label">Username:</label>
+                    <input type="text" class="form-control" name="email" id="email" />
+                    <p id="email-info" style="color:red"></p>
+                </div>
+                <div class="mb-2">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" name="password" id="password" />
+                    <p id="password-info" style="color:red"></p>
+                </div>
+                <div class="flex">
+                    <input type="submit" class="btn btn-primary custom-btn m-auto" value="Log in">
+                </div>
+            </form>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

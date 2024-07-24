@@ -83,7 +83,7 @@ $(document).ready(function () {
 
                         var qty_label = $('<label>').addClass('qty_label').text('QTY : ');
 
-                        var qty_input = $('<input>').attr('type', 'number').val(1).addClass('qty_input').attr('min', '0').change(function () {
+                        var qty_input = $('<input>').attr('type', 'number').val(1).addClass('qty_input').attr('min', '1').change(function () {
                             var updated_quantity = $(this).val();
                             $.ajax({
                                 url: '/updateQuantity',

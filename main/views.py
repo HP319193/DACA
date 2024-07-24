@@ -64,14 +64,13 @@ def login(request):
     return HttpResponse(loginpage.render({}, request))
 
 def handlelogin(request):
+    username = request.POST['email']
+    password = request.POST['password']
 
-    try:
-        m = Members.objects.get(email=request.POST['email'])
-        if m.password == request.POST['password']:
-            request.session['member_id'] = m.id
-            
-            return HttpResponseRedirect(reverse('admin'))
-    except Members.DoesNotExist:
+    if username == "admin" and password == "password":
+        request.session['status'] = True
+        return HttpResponseRedirect(reverse('admin'))
+    else:
         return HttpResponse("Your username and password didn't match.")
     # template = loader.get_template("login.html")
     # return HttpResponse(template.render())
@@ -88,7 +87,7 @@ def adminProcess(request):
 
     admin = loader.get_template("admin.html")
     login = loader.get_template("login.html")
-    if "member_id" in request.session:
+    if "status" in request.session:
         allprocess = ImageProcessId.objects.all().values()
         processes = []
         for oncepro in allprocess:
@@ -116,6 +115,7 @@ def adminProcess(request):
             "processes" : processes
         }
         return HttpResponse(admin.render(data, request))
+        
     else: 
         return HttpResponse(login.render({}, request))
             

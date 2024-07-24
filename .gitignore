@@ -6,3 +6,4 @@ main/__pycache__
 DACA/__pycache__
 venv
 main/migrations/__pycache__
+.python-version
