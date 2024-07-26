@@ -95,7 +95,7 @@ def adminProcess(request):
             names = oncepro['imageIds']
             names = names[:len(names)]
             names = names.split(",")
-            print(names)
+            # print(names)
             process = []
             images = []
             for name in names:
@@ -103,17 +103,23 @@ def adminProcess(request):
                 try:
                     image = Image.objects.get(name = name)
                 except:
-                    print("error")
+                    pass
                 else: 
-                    images.append(image)
-            process = {
-                "date" : date,
-                "images" : images
-            }
-            processes.append(process)
+                    print(f"s{image.status}s")
+                    if image.status != "initial":
+                        images.append(image)
+            
+            if len(images) != 0:
+                process = {
+                    "date" : date,
+                    "images" : images
+                }
+                processes.append(process)
         data = {
             "processes" : processes
         }
+
+        print(data)
         return HttpResponse(admin.render(data, request))
         
     else: 
@@ -317,6 +323,7 @@ def processImage(request):
 
             if os.path.exists(os.path.join("main/static/output", f"fullsize_{filename}")):
                 filelist.append(filename)
+
         imageIds = ImageProcessId(imageIds=imagenames)
         imageIds.save()
         return JsonResponse({"filelist": filelist})
