@@ -82,34 +82,25 @@ def logout(request):
 def adminProcess(request):
     admin = loader.get_template("admin.html")
     login = loader.get_template("login.html")
+    
     if "status" in request.session:
         allprocess = Process.objects.all().values()
         processes = []
         for oncepro in allprocess:
             date =  oncepro['datetime']
-            names = oncepro['imageIds']
-            names = names[:len(names)]
-            names = names.split(",")
-            # print(names)
-            process = []
-            images = []
-            for name in names:
-                print(name)
-                try:
-                    image = Image.objects.get(name = name)
-                except:
-                    pass
-                else: 
-                    print(f"s{image.status}s")
-                    if image.status != "initial":
-                        images.append(image)
+
+            processId = oncepro['processId']
+
+            images = Image.objects.filter(processId=processId)
             
-            if len(images) != 0:
+            if len(images) != 0 and oncepro['status'] != "initial":
                 process = {
                     "date" : date,
-                    "images" : images
+                    "images" : images,
+                    "status": oncepro['status']
                 }
                 processes.append(process)
+
         data = {
             "processes" : processes
         }
