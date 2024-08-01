@@ -84,7 +84,7 @@ def adminProcess(request):
     login = loader.get_template("login.html")
     
     if "status" in request.session:
-        allprocess = Process.objects.all().values()
+        allprocess = Process.objects.all().order_by('-datetime').values()
         processes = []
         for oncepro in allprocess:
             date =  oncepro['datetime']
