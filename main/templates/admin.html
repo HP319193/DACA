@@ -19,7 +19,7 @@
             <div class="processPanel">
                 <div class="d-flex justify-content-between processHeader py-3 px-2">{{ forloop.counter }}. Processed at
                     {{ process.date }}
-
+                    {{ process.id }}
                     {% if process.status == "rejected" %}
                     <a href="./fix">Fix</a>
                     {% endif %}

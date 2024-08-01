@@ -97,7 +97,8 @@ def adminProcess(request):
                 process = {
                     "date" : date,
                     "images" : images,
-                    "status": oncepro['status']
+                    "status": oncepro['status'],
+                    "id": processId
                 }
                 processes.append(process)
 
