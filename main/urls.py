@@ -16,11 +16,17 @@ urlpatterns = [
     path('handlelogin/', views.handlelogin, name="handlelogin"),
     path('submit', views.submit, name="submit"),
     path('fix', views.fix, name="fix"),
+    path('fix/<str:processId>', views.fix, name="fix_id"),
     path('recheck', views.recheck, name="recheck"),
+    path('recheck/<str:processId>', views.recheck, name="recheck_id"),
     path('updateQuantity', views.updateQuantity, name="updateQuantity"),
     path('processFix', views.processFix, name="processFix"),
     path('download/<filepath>', views.download_file, name='download_file'),
+    path('fix/download/<filepath>', views.download_file, name='download_file'),
+    path('recheck/download/<filepath>', views.download_file, name='download_file'),
     path('source/<filepath>', views.source_file, name='source_file'),
+    path('fix/source/<filepath>', views.source_file, name='source_file'),
+    path('recheck/source/<filepath>', views.source_file, name='source_file'),
 ]
 
 

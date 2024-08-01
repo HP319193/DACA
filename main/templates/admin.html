@@ -21,10 +21,10 @@
                     {{ process.date }}
                     {{ process.id }}
                     {% if process.status == "rejected" %}
-                    <a href="./fix">Fix</a>
+                    <a href="./fix/{{process.id}}">Fix</a>
                     {% endif %}
                     {% if process.status == "fixed" %}
-                    <a href="./recheck">Recheck</a>
+                    <a href="./recheck/{{process.id}}">Recheck</a>
                     {% endif %}
                 </div>
 
@@ -37,7 +37,7 @@
                                             max-width: 200px;
                                             max-height: 200px;
                                         " class="{{image.status}}" />
-                                {% if image.status == rejected %}
+                                {% if image.status == "rejected" %}
                                 <div class="d-flex flex-column">
                                     <img src="{% static 'output/identity_' %}{{ image.file }}"
                                         class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"

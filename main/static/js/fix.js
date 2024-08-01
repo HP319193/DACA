@@ -22,6 +22,7 @@ $(document).ready(function () {
                 url: '/processFix',
                 method: 'POST',
                 data: fileData,
+                async: false,
                 processData: false,
                 contentType: false,
                 success: function (result) {

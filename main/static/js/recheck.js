@@ -30,6 +30,7 @@ $(document).ready(function () {
 
     $('#submit').click(function () {
         var items = $('#itemsbar').find('.imagebar');
+        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
         items.each(function (index, item) {
             var key = $(item).find('img').attr('alt');
@@ -37,7 +38,9 @@ $(document).ready(function () {
 
             $.ajax({
                 url: '/submit',
+                headers: { 'X-CSRFToken': csrfToken },
                 method: 'POST',
+                async: false,
                 data: { key: key, value: value },
                 success: function (result) {
                     console.log(result);
@@ -55,6 +58,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/submit',
                 method: 'POST',
+                async: false,
                 data: { key: key, value: value },
                 success: function (result) {
                     console.log(result);

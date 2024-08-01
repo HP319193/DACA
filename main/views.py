@@ -106,6 +106,7 @@ def adminProcess(request):
             "processes" : processes
         }
 
+        print(data)
         return HttpResponse(admin.render(data, request))
         
     else: 
@@ -128,14 +129,20 @@ def submit(request):
         if process.status == "initial":
             process.status = status
             process.save()
-        elif value == "rejected" and process.status == "approved":
+        elif status == "rejected" and process.status == "approved":
             process.status = status
             process.save()
-            
+        elif process.status == "fixed":
+            process.status = status
+            process.save()
+
         return JsonResponse({"status": "good"})
         
-def fix(request):
-    items = Image.objects.filter(status='rejected')
+def fix(request, processId=None):
+    if processId:
+        items = Image.objects.filter(status='rejected', processId=processId)
+    else:
+        items = Image.objects.filter(status='rejected')
     rejected = []
 
     for item in items:
@@ -144,15 +151,16 @@ def fix(request):
     print(rejected)
     return render(request, 'fix.html', {"items": rejected})
 
-def recheck(request):
-    items = Image.objects.filter(status='awaiting')
+def recheck(request, processId=None):
+    if processId:
+        items = Image.objects.filter(status='fixed', processId=processId)
+    else:
+        items = Image.objects.filter(status='fixed')
     awaiting = []
 
     for item in items:
         id = item.name.split('.')[0]
         awaiting.append({"name": item.name, "quantity": item.quantity, "id": id})
-
-    print(awaiting)
 
     exist = len(awaiting)
 
@@ -291,7 +299,14 @@ def processFix(request):
         with open(file_path, 'wb') as f:
             f.write(file.read())
 
-        Image.objects.filter(name=name).update(status="awaiting")
+        Image.objects.filter(name=name).update(status="fixed")
+
+        processId = Image.objects.get(name=name).processId
+
+        rejectedItems = Image.objects.filter(processId=processId, status="rejected")
+
+        if len(rejectedItems) == 0:
+            Process.objects.filter(processId=processId).update(status="fixed")
         
         return JsonResponse({"status": "good"})
     

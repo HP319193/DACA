@@ -135,6 +135,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/submit',
                 method: 'POST',
+                async: false,
                 headers: { 'X-CSRFToken': csrfToken },
                 data: { key: key, value: value },
                 success: function (result) {
@@ -154,6 +155,7 @@ $(document).ready(function () {
                 url: '/submit',
                 headers: { 'X-CSRFToken': csrfToken },
                 method: 'POST',
+                async: false,
                 data: { key: key, value: value },
                 success: function (result) {
                     console.log(result);
