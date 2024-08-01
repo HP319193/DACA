@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
 from .models import Image
-from .models import ImageProcessId
+from .models import Process
 from django.views.decorators.csrf import csrf_exempt
 
 from django.http import FileResponse
@@ -15,29 +15,25 @@ from typing import List, Tuple
 import uuid, os
 from .models import Members 
 
+import uuid
 output_folder = "main/static/output"
 
-@csrf_exempt
-def home1(request):
-    members = Members.objects.all().values()
-    context = {
-        'members' : members 
-    } 
-    template = loader.get_template("index.html")
-    return HttpResponse(template.render(context))
 def add(request):
     template = loader.get_template("add.html")
     return HttpResponse(template.render({}, request))
+
 def addrecord(request):
     x = request.POST['first']
     y = request.POST['last']
     member = Members(firstname=x, lastname=y)
     member.save()
     return HttpResponseRedirect(reverse('home'))
+
 def delete(request, id):
     member = Members.objects.get(id=id)
     member.delete()
     return HttpResponseRedirect(reverse('home'))
+
 def update(request, id):
     member = Members.objects.get(id=id)
     context = {
@@ -45,14 +41,16 @@ def update(request, id):
     }
     template = loader.get_template("update.html")
     return HttpResponse(template.render(context, request))
+
 def updatemember(request, id):
     first = request.POST['firstname']
     last = request.POST['lastname']
     member = Members.objects.get(id=id)
     member.firstname = first
-    print(last)
+
     member.lastname = last
     member.save()
+
     return HttpResponseRedirect(reverse('home'))
 
 def signup(request):
@@ -72,23 +70,20 @@ def handlelogin(request):
         return HttpResponseRedirect(reverse('admin'))
     else:
         return HttpResponse("Your username and password didn't match.")
-    # template = loader.get_template("login.html")
-    # return HttpResponse(template.render())
+
 def logout(request):
     login = loader.get_template("login.html")
     try:
         del request.session['member_id']
     except KeyError:
         pass
-    # return HttpResponse("You're logged out.")
     return HttpResponse(login.render({}, request))
 
 def adminProcess(request):
-
     admin = loader.get_template("admin.html")
     login = loader.get_template("login.html")
     if "status" in request.session:
-        allprocess = ImageProcessId.objects.all().values()
+        allprocess = Process.objects.all().values()
         processes = []
         for oncepro in allprocess:
             date =  oncepro['datetime']
@@ -119,14 +114,11 @@ def adminProcess(request):
             "processes" : processes
         }
 
-        print(data)
         return HttpResponse(admin.render(data, request))
         
     else: 
         return HttpResponse(login.render({}, request))
             
-
-
 def submit(request):
     if request.method == "POST":
         key = request.POST.get('key')
@@ -137,7 +129,17 @@ def submit(request):
             status = "approved"
 
         Image.objects.filter(name=key).update(status=status)
+        processId = Image.objects.get(name=key).processId   
 
+        process = Process.objects.get(processId=processId)
+
+        if process.status == "initial":
+            process.status = status
+            process.save()
+        elif value == "rejected" and process.status == "approved":
+            process.status = status
+            process.save()
+            
         return JsonResponse({"status": "good"})
         
 def fix(request):
@@ -305,18 +307,19 @@ def processImage(request):
     if request.method == 'POST' and request.FILES:
         files = request.FILES.getlist('files[]')
         
+        processId = str(uuid.uuid4())
         filelist = []
-        imagenames = ""
+
         for file in files:
-            
             extension = os.path.splitext(file.name)[1]
             image = Image()
+
             image.status = "initial"
             filename = str(uuid.uuid4()) + extension
-            imagenames += filename+","  #all processed images' name 
             image.name = filename
             file.name = filename
             image.file = file
+            image.processId = processId
             image.save()
 
             cropImage(filename)
@@ -324,8 +327,9 @@ def processImage(request):
             if os.path.exists(os.path.join("main/static/output", f"fullsize_{filename}")):
                 filelist.append(filename)
 
-        imageIds = ImageProcessId(imageIds=imagenames)
+        imageIds = Process(processId=processId, status="initial")
         imageIds.save()
+
         return JsonResponse({"filelist": filelist})
 
 @csrf_exempt
@@ -334,7 +338,6 @@ def updateQuantity(request):
         name = request.POST.get('name')
         quantity = request.POST.get('quantity')
 
-        print(name)
         try:
             Image.objects.filter(name=name).update(quantity=int(quantity))
             return JsonResponse({"status": "good"})
@@ -346,7 +349,6 @@ def updateQuantity(request):
 def getQuantity(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-
         image = Image.objects.get(name = name)
         quantity = image.quantity
 

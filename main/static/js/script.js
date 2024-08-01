@@ -127,6 +127,7 @@ $(document).ready(function () {
     $('#submit').click(function () {
         var items = $('#itemsbar').find('.imagebar');
         var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
         items.each(function (index, item) {
             var key = $(item).find('img').attr('alt');
             var value = true;
